@@ -12,4 +12,5 @@
     <string name="title">Title</string>
     <string name="note_hint_txt">Write your note here</string>
     <string name="save">Save</string>
+    <string name="empty_note_error_msg">Note must not be empty</string>
 </resources>
