@@ -1,30 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <data>
+        <variable
+            name="fragment"
+            type="com.example.notes.view.fragment.AddNewNoteFragment" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.fragment.AddNewNoteFragment">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textview_second"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/button_second"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            android:padding="@dimen/material_padding_for_pages">
+
+            <EditText
+                android:id="@+id/edtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title"
+                android:background="@null"
+                android:textSize="@dimen/title_text_size"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="@dimen/farness_divider_title_note"
+                android:layout_marginBottom="@dimen/farness_divider_title_note"/>
+
+            <EditText
+                android:id="@+id/edtNoteBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/note_hint_txt"
+                android:background="@null"
+                android:textSize="@dimen/title_text_size"/>
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/button_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/previous"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_second" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="@string/save"
+            android:enabled="false"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 </layout>
