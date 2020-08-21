@@ -1,32 +1,39 @@
 package com.example.notes.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
+import android.widget.Toast
 import com.example.notes.R
+import com.example.notes.databinding.FragmentAddNewNoteBinding
+import com.example.notes.view.fragment.base.BaseFragmentWithViewModel
+import com.example.notes.viewmodel.AddNewNodeViewModel
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
-class AddNewNoteFragment : Fragment() {
-
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_new_note, container, false)
-    }
+class AddNewNoteFragment : BaseFragmentWithViewModel<FragmentAddNewNoteBinding, AddNewNodeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragment = this
+        vm.title = binding.edtTitle.text.toString()
+        vm.noteBody = binding.edtNoteBody.text.toString()
+    }
 
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+    override fun getViewModelClass(): Class<AddNewNodeViewModel> {
+        return AddNewNodeViewModel::class.java
+    }
+
+    override fun getLayoutResource(): Int {
+        return R.layout.fragment_add_new_note
+    }
+
+    fun onSaveClicked(){
+        if (nodeIsNotEmpty()){
+            vm.createNode()
+        } else {
+            Toast.makeText(context, getString(R.string.empty_note_error_msg), Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun nodeIsNotEmpty(): Boolean{
+        return binding.edtTitle.text.isNotEmpty() && binding.edtNoteBody.text.isNotEmpty()
     }
 }
