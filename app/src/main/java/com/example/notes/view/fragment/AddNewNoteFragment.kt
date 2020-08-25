@@ -4,21 +4,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.notes.R
-import com.example.notes.apiService.AppDatabase
 import com.example.notes.databinding.FragmentAddNewNoteBinding
+import com.example.notes.model.Note
 import com.example.notes.view.fragment.base.BaseFragmentWithViewModel
 import com.example.notes.viewmodel.AddNewNodeViewModel
 
 class AddNewNoteFragment : BaseFragmentWithViewModel<FragmentAddNewNoteBinding, AddNewNodeViewModel>() {
 
-    lateinit var db:AppDatabase
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.fragment = this
-        vm.note.title = binding.edtTitle.text.toString()
-        vm.note.noteBody = binding.edtNoteBody.text.toString()
-        db = initDB()
+        vm.note = Note(null, binding.edtTitle.text.toString(), binding.edtNoteBody.text.toString())
+
     }
 
     override fun getViewModelClass(): Class<AddNewNodeViewModel> {
@@ -41,12 +38,9 @@ class AddNewNoteFragment : BaseFragmentWithViewModel<FragmentAddNewNoteBinding, 
         return binding.edtTitle.text.isNotEmpty() && binding.edtNoteBody.text.isNotEmpty()
     }
 
-    private fun initDB(): AppDatabase {
-        return AppDatabase.getInstance(context)!!
-    }
-
     private fun addNote(){
         navigateTo(R.id.action_AddNewNoteFragment_to_NotesFragment)
+        vm.note = Note(null, binding.edtTitle.text.toString(), binding.edtNoteBody.text.toString())
         db.getNoteDao().insert(vm.note)
     }
 }
