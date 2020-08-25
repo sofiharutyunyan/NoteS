@@ -22,8 +22,8 @@ interface NoteDao {
     fun delete(vararg note: Note?)
 
     @Update
-    fun update(vararg photos: Note?)
+    fun update(vararg note: Note?)
 
     @Insert
-    fun insert(vararg photos: Note?)
+    fun insert(vararg note: Note?)
 }
