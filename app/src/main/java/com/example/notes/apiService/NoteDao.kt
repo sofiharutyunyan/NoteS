@@ -1,9 +1,6 @@
 package com.example.notes.apiService
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.notes.model.Note
 
 @Dao
@@ -11,17 +8,22 @@ interface NoteDao {
 
     @Query("SELECT * FROM note")
     fun getAll(): List<Note>
+//
+//    @Query("SELECT * FROM note WHERE uid IN (:userIds)")
+//    fun loadAllByIds(userIds: IntArray): List<Note>
+//
+//    @Query("SELECT * FROM user WHERE title LIKE :title AND " +
+//            "note_body LIKE :noteBody LIMIT 1")
 
-    @Query("SELECT * FROM note WHERE uid IN (:userIds)")
-    fun loadAllByIds(userIds: IntArray): List<Note>
+//    fun findNote(title: String, noteBody: String): Note
 
-    @Query("SELECT * FROM user WHERE title LIKE :title AND " +
-            "note_body LIKE :noteBody LIMIT 1")
-    fun findNote(title: String, noteBody: String): Note
-
-    @Insert
-    fun insertAll(vararg users: Note)
 
     @Delete
-    fun delete(note: Note)
+    fun delete(vararg note: Note?)
+
+    @Update
+    fun update(vararg photos: Note?)
+
+    @Insert
+    fun insert(vararg photos: Note?)
 }
