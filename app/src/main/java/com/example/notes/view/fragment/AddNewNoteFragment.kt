@@ -5,11 +5,12 @@ import android.view.View
 import android.widget.Toast
 import com.example.notes.R
 import com.example.notes.databinding.FragmentAddNewNoteBinding
+import com.example.notes.listener.NoteInteractionListener
 import com.example.notes.model.Note
 import com.example.notes.view.fragment.base.BaseFragmentWithViewModel
 import com.example.notes.viewmodel.AddNewNodeViewModel
 
-class AddNewNoteFragment : BaseFragmentWithViewModel<FragmentAddNewNoteBinding, AddNewNodeViewModel>() {
+class AddNewNoteFragment : BaseFragmentWithViewModel<FragmentAddNewNoteBinding, AddNewNodeViewModel>(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
