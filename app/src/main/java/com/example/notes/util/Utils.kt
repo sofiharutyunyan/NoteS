@@ -1,19 +1,27 @@
 package com.example.notes.util
 
 import android.content.Context
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.notes.listener.NoteInteractionListener
+import com.example.notes.model.Note
 
 class Utils{
 
     companion object{
-        fun showNoteUpdateDialog( context:Context){
+        fun showNoteUpdateDialog(
+            context: Context,
+            notesInteractionListener: NoteInteractionListener,
+            note: Note
+        ){
 
             val items = arrayOf<CharSequence>("Update", "Delete")
             val dialog = AlertDialog.Builder(context).setItems(items
             ) { dialog, which ->
-                Toast.makeText(context, items[which], Toast.LENGTH_LONG).show()
-
+                if (which == 0){
+                    notesInteractionListener.updateNote(note)
+                } else{
+                    notesInteractionListener.deleteNote(note)
+                }
             }
             dialog.show()
         }
