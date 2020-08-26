@@ -17,6 +17,8 @@ interface NoteDao {
 
 //    fun findNote(title: String, noteBody: String): Note
 
+    @Query("SELECT * FROM note WHERE uid = :key")
+    fun get(key: Int): Note?
 
     @Delete
     fun delete(vararg note: Note?)
