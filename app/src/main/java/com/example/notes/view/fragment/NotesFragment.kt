@@ -43,12 +43,12 @@ class NotesFragment : BaseFragmentWithViewModel<FragmentNotesBinding, NotesViewM
     }
 
     override fun updateNote(note:Note) {
-        navigateTo(R.id.action_NotesFragment_to_AddNewNoteFragment)
-//        db.getNoteDao().update(note)
+        navigateToWithData(R.id.action_NotesFragment_to_AddNewNoteFragment, note)
+        adapter.notifyDataSetChanged()
     }
 
     override fun deleteNote(note:Note) {
-        adapter.removeNote(note)
+        adapter.removeItem(note)
         db.getNoteDao().delete(note)
     }
 

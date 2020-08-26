@@ -5,6 +5,7 @@ import com.example.notes.viewmodel.base.BaseViewModel
 
 class AddNewNodeViewModel : BaseViewModel() {
 
-     lateinit var note: Note
+    var isNewNote: Boolean = true
+    lateinit var note: Note
 
 }

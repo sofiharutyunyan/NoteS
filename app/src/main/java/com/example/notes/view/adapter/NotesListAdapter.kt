@@ -28,7 +28,7 @@ class NotesListAdapter(private var list: ArrayList<Note>, var notesInteractionLi
 
     override fun getItemCount(): Int = list.size
 
-    fun removeNote(note: Note) {
+    fun removeItem(note: Note) {
         list.remove(note)
         notifyDataSetChanged()
     }
