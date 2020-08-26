@@ -2,14 +2,13 @@ package com.example.notes.view.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
 import com.example.notes.databinding.FragmentNotesBinding
 import com.example.notes.listener.NoteInteractionListener
 import com.example.notes.model.Note
+import com.example.notes.util.Utils
 import com.example.notes.view.adapter.NotesListAdapter
 import com.example.notes.view.fragment.base.BaseFragmentWithViewModel
 import com.example.notes.viewmodel.NotesViewModel
@@ -20,6 +19,7 @@ class NotesFragment : BaseFragmentWithViewModel<FragmentNotesBinding, NotesViewM
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Utils.hideKeyboard(context, activity?.currentFocus)
         binding.fragment = this
         initAdapter()
     }

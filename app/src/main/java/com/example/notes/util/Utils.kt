@@ -1,6 +1,8 @@
 package com.example.notes.util
 
 import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import com.example.notes.listener.NoteInteractionListener
 import com.example.notes.model.Note
@@ -24,6 +26,12 @@ class Utils{
                 }
             }
             dialog.show()
+        }
+
+        fun hideKeyboard(context: Context?, currentFocus: View?){
+            val inputManager: InputMethodManager =
+                context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.SHOW_FORCED)
         }
     }
 }
