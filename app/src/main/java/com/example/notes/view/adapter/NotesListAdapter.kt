@@ -16,14 +16,13 @@ class NotesListAdapter(private var list: ArrayList<Note>, var notesInteractionLi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemNoteBinding.inflate(inflater)
-        return NoteViewHolder(binding)
+        return NoteViewHolder(binding, notesInteractionListener)
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note: Note = list[position]
         this.position = position
         holder.bind(note)
-        holder.notesInteractionListener = notesInteractionListener
     }
 
     override fun getItemCount(): Int = list.size

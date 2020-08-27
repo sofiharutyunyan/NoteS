@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
+import com.example.notes.R
 import com.example.notes.listener.NoteInteractionListener
 import com.example.notes.model.Note
 
@@ -16,7 +17,7 @@ class Utils{
             note: Note
         ){
 
-            val items = arrayOf<CharSequence>("Update", "Delete")
+            val items = arrayOf<CharSequence>(context.getString(R.string.update), context.getString(R.string.delete))
             val dialog = AlertDialog.Builder(context).setItems(items
             ) { dialog, which ->
                 if (which == 0){

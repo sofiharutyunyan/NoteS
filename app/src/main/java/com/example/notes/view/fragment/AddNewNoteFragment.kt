@@ -28,6 +28,7 @@ class AddNewNoteFragment : BaseFragmentWithViewModel<FragmentAddNewNoteBinding, 
             vm.note = requireArguments().getParcelable(ConstantsBundle.updatebleNote)!!
             binding.edtTitle.setText(vm.note.title)
             binding.edtNoteBody.setText(vm.note.noteBody)
+            binding.btnSave.text = getString(R.string.update)
         }
     }
 
@@ -48,7 +49,7 @@ class AddNewNoteFragment : BaseFragmentWithViewModel<FragmentAddNewNoteBinding, 
     }
 
     private fun nodeIsNotEmpty(): Boolean{
-        return binding.edtTitle.text.isNotEmpty() && binding.edtNoteBody.text.isNotEmpty()
+        return binding.edtTitle.text!!.isNotEmpty() && binding.edtNoteBody.text!!.isNotEmpty()
     }
 
     private fun addNote(){

@@ -6,9 +6,8 @@ import com.example.notes.listener.NoteInteractionListener
 import com.example.notes.model.Note
 import com.example.notes.util.Utils
 
-class NoteViewHolder(val binding:ListItemNoteBinding) : RecyclerView.ViewHolder(binding.root) {
+class NoteViewHolder(val binding:ListItemNoteBinding, var notesInteractionListener: NoteInteractionListener) : RecyclerView.ViewHolder(binding.root) {
 
-    lateinit var notesInteractionListener: NoteInteractionListener
     lateinit var note:Note
 
     fun bind(note: Note) {
