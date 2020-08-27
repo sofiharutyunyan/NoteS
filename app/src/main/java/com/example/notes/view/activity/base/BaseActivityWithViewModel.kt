@@ -1,4 +1,4 @@
-package com.service.buscostcounter.view.activity.base
+package com.example.notes.view.activity.base
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
