@@ -1,32 +1,66 @@
 package com.example.notes.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.text.Editable
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
+import android.widget.Toast
 import com.example.notes.R
+import com.example.notes.databinding.FragmentAddNewNoteBinding
+import com.example.notes.listener.NoteInteractionListener
+import com.example.notes.model.Note
+import com.example.notes.util.ConstantsBundle
+import com.example.notes.view.fragment.base.BaseFragmentWithViewModel
+import com.example.notes.viewmodel.AddNewNodeViewModel
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
-class AddNewNoteFragment : Fragment() {
-
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_new_note, container, false)
-    }
+class AddNewNoteFragment : BaseFragmentWithViewModel<FragmentAddNewNoteBinding, AddNewNodeViewModel>(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragment = this
+        vm.note = Note(null, binding.edtTitle.text.toString(), binding.edtNoteBody.text.toString())
+        initArguments()
 
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+    }
+
+    private fun initArguments() {
+        if (arguments != null){
+            vm.isNewNote = false
+            vm.note = requireArguments().getParcelable(ConstantsBundle.updatebleNote)!!
+            binding.edtTitle.setText(vm.note.title)
+            binding.edtNoteBody.setText(vm.note.noteBody)
+            binding.btnSave.text = getString(R.string.update)
         }
+    }
+
+    override fun getViewModelClass(): Class<AddNewNodeViewModel> {
+        return AddNewNodeViewModel::class.java
+    }
+
+    override fun getLayoutResource(): Int {
+        return R.layout.fragment_add_new_note
+    }
+
+    fun onSaveClicked(){
+        if (nodeIsNotEmpty()){
+            addNote()
+        } else {
+            Toast.makeText(context, getString(R.string.empty_note_error_msg), Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun nodeIsNotEmpty(): Boolean{
+        return binding.edtTitle.text!!.isNotEmpty() && binding.edtNoteBody.text!!.isNotEmpty()
+    }
+
+    private fun addNote(){
+        navigateTo(R.id.action_AddNewNoteFragment_to_NotesFragment)
+        vm.note.title = binding.edtTitle.text.toString()
+        vm.note.noteBody = binding.edtNoteBody.text.toString()
+        if (vm.isNewNote){
+            db.getNoteDao().insert(vm.note)
+        } else {
+            db.getNoteDao().update(vm.note)
+        }
+
     }
 }

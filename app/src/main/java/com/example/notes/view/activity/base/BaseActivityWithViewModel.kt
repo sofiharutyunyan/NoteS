@@ -1,8 +1,8 @@
-package com.service.buscostcounter.view.activity.base
+package com.example.notes.view.activity.base
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.notes.viewmodel.base.BaseViewModel
 
 abstract class BaseActivityWithViewModel<T : ViewDataBinding, U : BaseViewModel> : BaseActivity<T>() {
@@ -13,6 +13,6 @@ abstract class BaseActivityWithViewModel<T : ViewDataBinding, U : BaseViewModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm  = ViewModelProviders.of(this).get(getViewModelClass())
+        vm  = ViewModelProvider(this).get(getViewModelClass())
     }
 }
