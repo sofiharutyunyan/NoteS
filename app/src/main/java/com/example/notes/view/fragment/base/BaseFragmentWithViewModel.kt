@@ -3,6 +3,7 @@ package com.example.notes.view.fragment.base
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.notes.apiService.AppDatabase
 import com.example.notes.viewmodel.base.BaseViewModel
@@ -22,7 +23,7 @@ abstract class BaseFragmentWithViewModel<T : ViewDataBinding, U : BaseViewModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm = ViewModelProviders.of(this).get(getViewModelClass())
+        vm = ViewModelProvider(this).get(getViewModelClass())
     }
 
     private fun initDB(): AppDatabase {
